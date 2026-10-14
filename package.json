@@ -1,0 +1,64 @@
+{
+   "name": "hono-api-skeleton",
+   "version": "1.0.0",
+   "description": "Hono API skeleton",
+   "engines": {
+      "node": ">=24"
+   },
+   "type": "module",
+   "main": "dist/index.js",
+   "scripts": {
+      "format": "prettier --write .",
+      "lint": "eslint src/",
+      "lint:fix": "eslint src/ --fix",
+      "dev": "tsx watch src/index.ts",
+      "build": "tsup src/index.ts && cp -r package.json .env prisma prisma.config.ts dist/",
+      "prod": "node index.js",
+      "prod:install": "npm i --omit=dev",
+      "postinstall": "prisma generate"
+   },
+   "dependencies": {
+      "@hono/node-server": "^2.1.1",
+      "@hono/zod-openapi": "^1.6.3",
+      "@hono/zod-validator": "^0.9.1",
+      "@prisma/adapter-mariadb": "^7.10.0",
+      "@prisma/client": "^7.10.0",
+      "@scalar/hono-api-reference": "^0.12.0",
+      "dotenv": "^18.0.6",
+      "hono": "^4.13.13",
+      "yaml": "^2.9.0"
+   },
+   "devDependencies": {
+      "@eslint/js": "^10.0.1",
+      "@types/node": "^26.4.1",
+      "@types/ws": "^8.18.2",
+      "eslint": "^10.9.1",
+      "eslint-config-prettier": "^10.1.8",
+      "eslint-plugin-simple-import-sort": "^14.0.0",
+      "eslint-plugin-unused-imports": "^4.4.1",
+      "prettier": "^3.9.6",
+      "prisma": "^7.9.1",
+      "tsup": "^8.5.1",
+      "tsx": "^4.23.13",
+      "typescript-eslint": "^8.69.0"
+   },
+   "prettier": {
+      "semi": true,
+      "singleQuote": true,
+      "trailingComma": "none",
+      "printWidth": 100,
+      "tabWidth": 3
+   },
+   "tsup": {
+      "entry": [
+         "src/index.ts"
+      ],
+      "outDir": "dist",
+      "format": [
+         "esm"
+      ],
+      "target": "node24",
+      "minify": true,
+      "clean": true
+   }
+}

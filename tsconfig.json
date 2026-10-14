@@ -1,0 +1,9 @@
+{
+   "compilerOptions": {
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "types": ["node"]
+   },
+   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/test.ts"],
+   "exclude": ["node_modules", "dist"]
+}

@@ -1,0 +1,8 @@
+DROP DATABASE IF EXISTS testdb;
+CREATE DATABASE testdb CHARACTER
+SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE testdb;
+
+CREATE TABLE test(
+   name VARCHAR(255)
+);
