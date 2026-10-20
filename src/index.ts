@@ -1,7 +1,6 @@
 // CREATE HONO
 import { serve } from '@hono/node-server';
 import { OpenAPIHono } from '@hono/zod-openapi';
-import { Scalar } from '@scalar/hono-api-reference';
 import { compress } from 'hono/compress';
 import { cors } from 'hono/cors';
 import { trimTrailingSlash } from 'hono/trailing-slash';
@@ -27,33 +26,6 @@ hono.use('*', debugLogger);
 
 // LOAD V1 ENDPOINTS
 hono.route('/api/v1', v1);
-
-// CREATE ENDPOINT DOCS
-hono.get('/api/v1/openapi.json', (c) => {
-   return c.json(
-      v1.getOpenAPI31Document({
-         openapi: '3.1.0',
-         info: {
-            title: 'Hono API Skeleton',
-            version: '1.0.0'
-         },
-         servers: [
-            {
-               url: '/api/v1'
-            }
-         ]
-      })
-   );
-});
-
-// HOST API DOCS
-hono.get(
-   '/api/v1/docs',
-   Scalar({
-      pageTitle: 'Hono API Skeleton',
-      url: '/api/v1/openapi.json'
-   })
-);
 
 // HANDLE ERRORS
 hono.onError((error, c) => handleErrors(c, error));
