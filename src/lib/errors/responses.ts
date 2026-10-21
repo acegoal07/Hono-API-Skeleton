@@ -44,7 +44,7 @@ export function forbiddenErrorResponse(c: Context, message?: string) {
          error: 'FORBIDDEN' as const,
          message: message || ('Access denied' as const)
       },
-      401
+      403
    );
 }
 

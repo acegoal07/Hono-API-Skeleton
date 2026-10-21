@@ -38,7 +38,7 @@ export const UnauthorisedErrorSchema = {
  * Forbidden error schema for open API docs
  */
 export const ForbiddenErrorSchema = {
-   401: {
+   403: {
       description: 'Forbidden',
       content: {
          'application/json': {
