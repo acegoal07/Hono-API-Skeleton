@@ -3,12 +3,12 @@ import { serve } from '@hono/node-server';
 import { OpenAPIHono } from '@hono/zod-openapi';
 import { compress } from 'hono/compress';
 import { cors } from 'hono/cors';
+import { logger } from 'hono/logger';
 import { trimTrailingSlash } from 'hono/trailing-slash';
 
 import v1 from './api/v1';
 import { env } from './lib/env';
 import handleErrors from './lib/errors/errorHandler';
-import { debugLogger } from './lib/middleware/debugLogger';
 
 // CREATE HONO
 const hono = new OpenAPIHono();
@@ -22,7 +22,7 @@ hono.use(
 );
 hono.use('*', trimTrailingSlash());
 hono.use('*', compress());
-hono.use('*', debugLogger);
+hono.use('*', logger());
 
 // LOAD V1 ENDPOINTS
 hono.route('/api/v1', v1);
