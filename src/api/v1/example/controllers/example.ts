@@ -16,11 +16,11 @@ export default new OpenAPIHono().openapi(
    createRoute({
       method: 'get',
       path: '/',
-      description: 'Get the currently logged in user',
-      tags: ['Users'],
+      description: 'Example endpoint',
+      tags: ['Example'],
       responses: {
          200: {
-            description: 'The logged in user',
+            description: 'Successfully exampled the endpoint',
             content: {
                'application/json': {
                   schema: ExampleReturnSchema
