@@ -24,8 +24,7 @@
       "@prisma/client": "^7.10.0",
       "@scalar/hono-api-reference": "^0.12.0",
       "dotenv": "^18.0.6",
-      "hono": "^4.13.13",
-      "yaml": "^2.9.0"
+      "hono": "^4.13.13"
    },
    "devDependencies": {
       "@eslint/js": "^10.0.1",
