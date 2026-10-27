@@ -1,7 +1,9 @@
 import { OpenAPIHono } from '@hono/zod-openapi';
 import { Scalar } from '@scalar/hono-api-reference';
 
-const hono = new OpenAPIHono();
+import example from './example';
+
+const hono = new OpenAPIHono().route('/example', example);
 
 // Generate OpenAPI documentation
 hono.get('/openapi.json', (c) => {

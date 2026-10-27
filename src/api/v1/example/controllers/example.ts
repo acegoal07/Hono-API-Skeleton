@@ -1,0 +1,55 @@
+import { createRoute, OpenAPIHono } from '@hono/zod-openapi';
+import { HTTPException } from 'hono/http-exception';
+
+import { HTTPExceptionCodes } from '../../../../lib/errors/enums';
+import {
+   BadRequestErrorSchema,
+   ConflictErrorSchema,
+   ForbiddenErrorSchema,
+   InternalServerErrorSchema,
+   NotFoundErrorSchema,
+   UnauthorisedErrorSchema
+} from '../../../../lib/errors/schemas';
+import { ExampleReturnSchema } from '../lib/schemas';
+
+export default new OpenAPIHono().openapi(
+   createRoute({
+      method: 'get',
+      path: '/',
+      description: 'Get the currently logged in user',
+      tags: ['Users'],
+      responses: {
+         200: {
+            description: 'The logged in user',
+            content: {
+               'application/json': {
+                  schema: ExampleReturnSchema
+               }
+            }
+         },
+         // All Available error response schemas which have corresponding responders
+         ...BadRequestErrorSchema,
+         ...UnauthorisedErrorSchema,
+         ...ForbiddenErrorSchema,
+         ...NotFoundErrorSchema,
+         ...ConflictErrorSchema,
+         ...InternalServerErrorSchema
+      }
+   }),
+   (c) => {
+      // Example of how to throw an API error the enum allows
+      // you to select between all the available error responses
+      if (false) {
+         throw new HTTPException(HTTPExceptionCodes.NotFound, {
+            message: 'This is an example error'
+         });
+      }
+
+      return c.json(
+         {
+            text: 'Hello World!'
+         },
+         200
+      );
+   }
+);

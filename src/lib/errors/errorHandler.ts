@@ -1,7 +1,7 @@
 import { Context } from 'hono';
 import { HTTPException } from 'hono/http-exception';
 
-import APIError, { APIErrorCode } from './apiError';
+import { HTTPExceptionCodes } from './enums';
 import {
    badRequestErrorResponse,
    conflictErrorResponse,
@@ -20,35 +20,18 @@ import {
 export default function handleErrors(c: Context, error: unknown) {
    if (error instanceof HTTPException) {
       switch (error.status) {
-         case 400:
+         case HTTPExceptionCodes.BadRequest:
             return badRequestErrorResponse(c, error.message);
-         case 401:
+         case HTTPExceptionCodes.Unauthorised:
             return unauthorisedErrorResponse(c, error.message);
-         case 403:
+         case HTTPExceptionCodes.Forbidden:
             return forbiddenErrorResponse(c, error.message);
-         case 404:
+         case HTTPExceptionCodes.NotFound:
             return notFoundErrorResponse(c, error.message);
-         case 409:
+         case HTTPExceptionCodes.Conflict:
             return conflictErrorResponse(c, error.message);
          default:
             return internalServerErrorResponse(c, error);
-      }
-   }
-
-   if (error instanceof APIError) {
-      switch (error.code) {
-         case APIErrorCode.BadRequest:
-            return badRequestErrorResponse(c, error.message);
-         case APIErrorCode.Unauthorised:
-            return unauthorisedErrorResponse(c, error.message);
-         case APIErrorCode.Forbidden:
-            return forbiddenErrorResponse(c, error.message);
-         case APIErrorCode.NotFound:
-            return notFoundErrorResponse(c, error.message);
-         case APIErrorCode.Conflict:
-            return conflictErrorResponse(c, error.message);
-         default:
-            return internalServerErrorResponse(c, error.error);
       }
    }
 

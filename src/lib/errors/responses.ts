@@ -34,8 +34,8 @@ export function unauthorisedErrorResponse(c: Context, message?: string) {
 
 /**
  * Responds with a forbidden error
- * @param {Context} c The hono context
- * @param {string} message The error message to go with the unauthorised
+ * @param c The hono context
+ * @param message The error message to go with the forbidden error
  * @returns The response function
  */
 export function forbiddenErrorResponse(c: Context, message?: string) {
@@ -50,8 +50,8 @@ export function forbiddenErrorResponse(c: Context, message?: string) {
 
 /**
  * Responds with a not found error response
- * @param {Context} c The hono context
- * @param {string} message The error message to go with the not found
+ * @param c The hono context
+ * @param message The error message to go with the not found
  * @returns The response function
  */
 export function notFoundErrorResponse(c: Context, message?: string) {
@@ -66,8 +66,8 @@ export function notFoundErrorResponse(c: Context, message?: string) {
 
 /**
  * Responds with a conflict error response
- * @param {Context} c The hono context
- * @param {string} message The error message to go with the not found
+ * @param c The hono context
+ * @param message The error message to go with the conflict error
  * @returns The response function
  */
 export function conflictErrorResponse(c: Context, message?: string) {
@@ -82,8 +82,8 @@ export function conflictErrorResponse(c: Context, message?: string) {
 
 /**
  * Responds with an internal server error response
- * @param {Context} c The hono context
- * @param {unknown} error The error it self
+ * @param c The hono context
+ * @param error The error it self
  * @returns The response function
  */
 export function internalServerErrorResponse(c: Context, error: unknown) {
