@@ -89,6 +89,23 @@ export const ConflictErrorSchema = {
 };
 
 /**
+ * Too many requests error schema for open API docs
+ */
+export const TooManyRequestsErrorSchema = {
+   429: {
+      description: 'Too many requests sent',
+      content: {
+         'application/json': {
+            schema: z.object({
+               error: z.literal('TOO_MANY_REQUESTS'),
+               message: z.union([z.literal('Too many requests sent'), z.string()])
+            })
+         }
+      }
+   }
+};
+
+/**
  * Internal server error schema for open API docs
  */
 export const InternalServerErrorSchema = {
@@ -99,6 +116,23 @@ export const InternalServerErrorSchema = {
             schema: z.object({
                error: z.literal('INTERNAL_SERVER_ERROR'),
                message: z.literal('An unexpected error occurred')
+            })
+         }
+      }
+   }
+};
+
+/**
+ * Service unavailable error schema for open API docs
+ */
+export const ServiceUnavailableErrorSchema = {
+   503: {
+      description: 'Service unavailable error',
+      content: {
+         'application/json': {
+            schema: z.object({
+               error: z.literal('SERVICE_UNAVAILABLE'),
+               message: z.union([z.literal('Service temporarily unavailable'), z.string()])
             })
          }
       }

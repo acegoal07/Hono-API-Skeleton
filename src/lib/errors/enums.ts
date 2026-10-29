@@ -7,5 +7,7 @@ export enum HTTPExceptionCodes {
    Forbidden = 403,
    NotFound = 404,
    Conflict = 409,
-   InternalServerError = 500
+   TooManyRequest = 429,
+   InternalServerError = 500,
+   ServiceUnavailable = 503
 }

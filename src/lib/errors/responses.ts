@@ -1,5 +1,7 @@
 import { Context } from 'hono';
 
+import { HTTPExceptionCodes } from './enums';
+
 /**
  * Responds with a bad request error
  * @param {Context} c The hono context
@@ -12,7 +14,7 @@ export function badRequestErrorResponse(c: Context, message?: string) {
          error: 'BAD_REQUEST' as const,
          message: message || ('The request was malformed' as const)
       },
-      400
+      HTTPExceptionCodes.BadRequest
    );
 }
 
@@ -28,7 +30,7 @@ export function unauthorisedErrorResponse(c: Context, message?: string) {
          error: 'UNAUTHORISED' as const,
          message: message || ('The request credentials are incorrect' as const)
       },
-      401
+      HTTPExceptionCodes.Unauthorised
    );
 }
 
@@ -44,7 +46,7 @@ export function forbiddenErrorResponse(c: Context, message?: string) {
          error: 'FORBIDDEN' as const,
          message: message || ('Access denied' as const)
       },
-      403
+      HTTPExceptionCodes.Forbidden
    );
 }
 
@@ -60,7 +62,7 @@ export function notFoundErrorResponse(c: Context, message?: string) {
          error: 'NOT_FOUND' as const,
          message: message || ('The requested resource does not exist' as const)
       },
-      404
+      HTTPExceptionCodes.NotFound
    );
 }
 
@@ -76,7 +78,23 @@ export function conflictErrorResponse(c: Context, message?: string) {
          error: 'CONFLICTING_RESOURCE' as const,
          message: message || ('There is already a resource in the database' as const)
       },
-      409
+      HTTPExceptionCodes.Conflict
+   );
+}
+
+/**
+ * Responds with a too many requests error response
+ * @param {Context} c The hono context
+ * @param {string} message The error message to go with the not found
+ * @returns The response function
+ */
+export function tooManyRequestsErrorResponse(c: Context, message?: string) {
+   return c.json(
+      {
+         error: 'TOO_MANY_REQUESTS',
+         message: message || ('Too many requests sent' as const)
+      },
+      HTTPExceptionCodes.TooManyRequest
    );
 }
 
@@ -94,6 +112,22 @@ export function internalServerErrorResponse(c: Context, error: unknown) {
          error: 'INTERNAL_SERVER_ERROR' as const,
          message: 'An unexpected error occurred' as const
       },
-      500
+      HTTPExceptionCodes.InternalServerError
+   );
+}
+
+/**
+ * Responds with an service unavailable error response
+ * @param {Context} c The hono context
+ * @param {string} message The message for the error
+ * @returns The response function
+ */
+export function serviceUnavailableErrorResponse(c: Context, message?: string) {
+   return c.json(
+      {
+         error: 'SERVICE_UNAVAILABLE' as const,
+         message: message || ('Service temporarily unavailable' as const)
+      },
+      HTTPExceptionCodes.ServiceUnavailable
    );
 }

@@ -8,6 +8,8 @@ import {
    ForbiddenErrorSchema,
    InternalServerErrorSchema,
    NotFoundErrorSchema,
+   ServiceUnavailableErrorSchema,
+   TooManyRequestsErrorSchema,
    UnauthorisedErrorSchema
 } from '../../../../lib/errors/schemas';
 import { ExampleReturnSchema } from '../lib/schemas';
@@ -33,7 +35,9 @@ export default new OpenAPIHono().openapi(
          ...ForbiddenErrorSchema,
          ...NotFoundErrorSchema,
          ...ConflictErrorSchema,
-         ...InternalServerErrorSchema
+         ...TooManyRequestsErrorSchema,
+         ...InternalServerErrorSchema,
+         ...ServiceUnavailableErrorSchema
       }
    }),
    (c) => {

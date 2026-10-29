@@ -8,6 +8,8 @@ import {
    forbiddenErrorResponse,
    internalServerErrorResponse,
    notFoundErrorResponse,
+   serviceUnavailableErrorResponse,
+   tooManyRequestsErrorResponse,
    unauthorisedErrorResponse
 } from './responses';
 
@@ -28,8 +30,12 @@ export default function handleErrors(c: Context, error: unknown) {
             return forbiddenErrorResponse(c, error.message);
          case HTTPExceptionCodes.NotFound:
             return notFoundErrorResponse(c, error.message);
+         case HTTPExceptionCodes.TooManyRequest:
+            return tooManyRequestsErrorResponse(c, error.message);
          case HTTPExceptionCodes.Conflict:
             return conflictErrorResponse(c, error.message);
+         case HTTPExceptionCodes.ServiceUnavailable:
+            return serviceUnavailableErrorResponse(c, error.message);
          default:
             return internalServerErrorResponse(c, error);
       }
