@@ -40,24 +40,5 @@
       "tsx": "^4.23.13",
       "typescript": "^6.0.3",
       "typescript-eslint": "^8.69.0"
-   },
-   "prettier": {
-      "semi": true,
-      "singleQuote": true,
-      "trailingComma": "none",
-      "printWidth": 100,
-      "tabWidth": 3
-   },
-   "tsup": {
-      "entry": [
-         "src/index.ts"
-      ],
-      "outDir": "dist",
-      "format": [
-         "esm"
-      ],
-      "target": "node24",
-      "minify": true,
-      "clean": true
    }
 }
