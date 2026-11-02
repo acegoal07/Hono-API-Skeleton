@@ -12,7 +12,7 @@
       "lint": "eslint src/",
       "lint:fix": "eslint src/ --fix",
       "dev": "tsx watch src/index.ts",
-      "build": "tsup src/index.ts && cp -r package.json .env prisma prisma.config.ts dist/",
+      "build": "tsup src/index.ts && shx cp -r package.json .env prisma prisma.config.ts dist/",
       "prod": "node index.js",
       "prod:install": "npm i --omit=dev",
       "postinstall": "prisma generate"
@@ -35,6 +35,7 @@
       "eslint-plugin-unused-imports": "^4.4.1",
       "prettier": "^3.9.6",
       "prisma": "^7.9.1",
+      "shx": "^0.4.0",
       "tsup": "^9.0.0",
       "tsx": "^4.23.13",
       "typescript": "^6.0.3",
