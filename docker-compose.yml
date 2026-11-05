@@ -1,6 +1,6 @@
 services:
-   bank_database:
-      container_name: bank_database
+   skeleton-database:
+      container_name: skeleton-database
       image: mariadb:latest
       restart: unless-stopped
       environment:
@@ -11,20 +11,20 @@ services:
       ports:
          - '3306:3306'
       volumes:
-         - database_data:/var/lib/mysql
+         - skeleton_database_data:/var/lib/mysql
          - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
-   bank_api:
-      container_name: bank
+   skeleton_api:
+      container_name: skeleton
       image: node:latest
       restart: unless-stopped
       working_dir: /app/src
       volumes:
          - ./:/app/src
       depends_on:
-         - bank_database
+         - skeleton_database
       ports:
          - '3000:3000'
       command: './run.sh'
 
 volumes:
-   database_data:
+   skeleton_database_data:
